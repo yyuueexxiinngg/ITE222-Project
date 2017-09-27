@@ -1,0 +1,26 @@
+STUDENTCODE1 PREFIXNAME1 PROGRAMNAMEENG1 NAME1 Text202 TxtStatus
+Tranferred
+
+Text12 COURSECODE1 COURSENAME1 CREDITATTEMPT CREDITTOTAL GRADE1
+1 MIS103   Computer Applications 4 -
+Semester   2/2016
+
+Text12 COURSECODE1 COURSENAME1 CREDITATTEMPT CREDITTOTAL GRADE1
+1 ENG101   College English I 4 4     A
+2 ITE101   Introduction to Information Technology 4 4     A
+3 ITE120   Web Development I 4 4     A
+4 POL104   Issues in International Human Rights 4 4     B
+Semester   3/2016
+
+Text12 COURSECODE1 COURSENAME1 CREDITATTEMPT CREDITTOTAL GRADE1
+1 ENG102   College English II 4 4     B+
+2 ITE201   IT Service Desk & Incident Management 4 4     B
+3 ITE210   Ethics and Law for Information Technology 4 4     A
+4 ITE231   Fundamentals of System Administration 4 4     B+
+Semester   1/2017
+
+Text12 COURSECODE1 COURSENAME1 CREDITATTEMPT CREDITTOTAL GRADE1
+1 ENG103   College English III 4 -
+2 ITE221   Programming I 4 -
+3 ITE331   Multimedia Technologies 4 -
+4 SOC101   Introduction to Sociology 4 -

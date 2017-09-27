@@ -1,0 +1,26 @@
+STUDENTCODE1,PREFIXNAME1,PROGRAMNAMEENG1,NAME1,Text202,TxtStatus,,,,,,
+,,,,Tranferred,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,MIS103 , Computer Applications,4,-,    
+,,,, Semester   2/2016,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ENG101 , College English I,4,4,    B+
+,,,,,,2,ITE101 , Introduction to Information Technology,4,4,    B
+,,,,,,3,ITE120 , Web Development I,4,4,    A
+,,,,,,4,MAT101 , Basic Mathematics,4,4,    C+
+,,,, Semester   3/2016,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ENG102 , College English II,4,4,    D+
+,,,,,,2,ITE201 , IT Service Desk & Incident Management,4,4,    B+
+,,,,,,3,ITE210 , Ethics and Law for Information Technology,4,4,    C
+,,,,,,4,ITE231 , Fundamentals of System Administration,4,4,    C+
+,,,, Semester   1/2017,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ITE221 , Programming I,4,-,    
+,,,,,,2,ITE321 ," System Analysis, Design & Implementation",4,-,    
+,,,,,,3,ITE331 , Multimedia Technologies,4,-,    
+,,,,,,4,ITE337 , Content Management Systems,4,-,    

@@ -1,0 +1,27 @@
+STUDENTCODE1,PREFIXNAME1,PROGRAMNAMEENG1,NAME1,Text202,TxtStatus,,,,,,
+,,,,Tranferred,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ACC101 , Principles of Accounting I,4,-,    
+,,,,,,2,ITE221 , Programming I,4,-,    
+,,,,,,3,LIB235 , Professional Ethics,4,-,    
+,,,,,,4,POL103 , Thai Government and Politics,4,-,    
+,,,,Tranferred,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ENG101 , College English I,4,-,    
+,,,, Semester   2/2016,,,,,,,
+,,,, Semester   3/2016,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ENG102 , College English II,4,4,    D+
+,,,,,,2,ITE101 , Introduction to Information Technology,4,-,    F
+,,,,,,3,ITE201 , IT Service Desk & Incident Management,4,4,    D+
+,,,,,,4,ITE231 , Fundamentals of System Administration,4,4,    C
+,,,, Semester   1/2017,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ITE120 , Web Development I,4,-,    
+,,,,,,2,ITE321 ," System Analysis, Design & Implementation",4,-,    
+,,,,,,3,ITE331 , Multimedia Technologies,4,-,    
+,,,,,,4,MUS101 , Music of World Cultures,4,-,    

@@ -1,0 +1,17 @@
+STUDENTCODE1,PREFIXNAME1,PROGRAMNAMEENG1,NAME1,Text202,TxtStatus,,,,,,
+,,,,Tranferred,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,MIS103 , Computer Applications,4,-,    
+,,,, Semester   3/2016,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ENG101 , College English I,4,-,    F
+,,,,,,2,ENG212 , Drama and Performance,4,-,    F
+,,,,,,3,HIS104 , Foundation of Western Civilization,4,-,    F
+,,,,,,4,LIB203 , Analytical Reading,4,-,    F
+,,,, Semester   1/2017,,,,,,,
+,,,,,,,,,,,
+,,,,,,Text12,COURSECODE1,COURSENAME1,CREDITATTEMPT,CREDITTOTAL,GRADE1
+,,,,,,1,ITE101 , Introduction to Information Technology,4,-,    
+,,,,,,2,ITE331 , Multimedia Technologies,4,-,    

@@ -1,0 +1,33 @@
+IT 2016,
+ITE101,Introduction to Information Technology
+ITE120,Web Development I
+ITE201,IT Service Desk & Incident Management
+ITE210,Ethics and Law for Information Technology
+ITE220,"Web Development II ( Pre: ITE120, ITE221)"
+ITE221,Programming I  
+ITE222,Programming II ( Pre: ITE221)
+ITE231,Fundamentals of System Administration
+ITE233,Application Development (Pre: ITE220)  
+ITE240,Principles of Operating Systems (Pre: ITE101)
+ITE254,Human Computer Interaction (Pre: ITE120)
+ITE321,"System Analysis, Design& Implementation(Pre: ITE101)     "
+ITE331,Multimedia Technologies
+ITE337,Content Management Systems (Pre: ITE120)
+ITE340,E-Commerce Systems & Infrastructure (Pre: ITE220)
+ITE342,Application Development-IOS (Pre: ITE222)
+ITE343,Application Development-Android (Pre: ITE222)
+ITE362,Digital Advertising Technology
+ITE365,Software Quality Management
+ITE367,Software Architecture and Modelling
+ITE368,Software Testing and Maintenance
+ITE420,"Information and System Security (Pre: ITE221, ITE475)"
+ITE435,Software Engineering
+ITE441,Fundamentals of Database System     
+ITE442,Database Management Systems (Pre: ITE441)
+ITE446,Current Topics in Software Engineering
+ITE447,Current Topics in Web Technology (Pre: ITE220)
+ITE448,Current Topics in Mobile Computing (Pre: ITE220)
+ITE451,Cloud Computing (Pre: ITE220)
+ITE475,Data Communication and Networking 
+ITE479,IT Planning and Project Management (Pre: ITE321)
+ITE499,Professional Internship

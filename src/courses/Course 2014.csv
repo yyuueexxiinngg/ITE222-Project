@@ -1,0 +1,36 @@
+IT 2014,
+ITE101,Introduction to Information Technology
+ITE120,Web Development I
+ITE201,IT Service Desk & Incident Management,ITE101
+ITE210,Ethics and Law for Information Technology
+ITE220,Web Development II,ITE120
+ITE221,Programming I
+ITE222,Programming II,ITE221
+ITE231,Fundamentals of System Administration,ITE221
+ITE235,Mobile Applications Architecture,ITE101
+ITE240,Principles of Operating Systems,ITE231
+ITE254,Mobile UX,ITE221,ITE235
+ITE299,Service Desk Internship,ITE201
+ITE321,System Analysis Design& Implementation,ITE222
+ITE331,Multimedia Technologies,ITE220 
+ITE337,Content Management Systems,ITE321
+ITE340,E-Commerce Systems & Infrastructure,BUS206
+ITE342,iOS Apps Development,ITE222
+ITE343,Android Apps Development,ITE222
+ITE351,IT Capacity Planning,ITE231  
+ITE352,Device Management,ITE101, BUS206
+ITE353,Mobile Communication & Computing,ITE235,ITE475
+ITE390,Business Intelligence Applications,STA101,BUS206
+ITE420,Information Security,ITE475
+ITE442,Database Management Systems,ITE321
+ITE443,Data Warehouse Systems & Data Mining,ITE442  
+ITE445,Mobile Games Development,ITE220 
+ITE448,Current Topics in Mobile Computing,ITE235  
+ITE449,Current Topics in Infrastructure Mgmt,ITE231  
+ITE451,Cloud Computing,ITE442,ITE475
+ITE452,Big Data,ITE442,ITE475
+ITE475,Data Communication and Networking,ITE231 
+ITE479,IT Planning and Project Management,120
+ITE480,Special Projects
+ITE485,System and Network Administration,ITE475
+ITE499,Professional Internship
