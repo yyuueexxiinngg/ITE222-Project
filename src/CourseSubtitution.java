@@ -10,13 +10,13 @@ public class CourseSubtitution {
     String current_year = "";
 
     private void read() throws IOException {
-        Scanner in = new Scanner(new File("src/other/Course Subtitution from 2016 to 2014.csv"));
+        Scanner in = new Scanner(new File("src/other/Course Substitution from 2016 to 2014.csv"));
         int subtitution_num = -1;
         while (in.hasNextLine()) {
             String line = in.nextLine();
             subtitution_num++;
         }
-        in = new Scanner(new File("src/other/Course Subtitution from 2016 to 2014.csv"));
+        in = new Scanner(new File("src/other/Course Substitution from 2016 to 2014.csv"));
         int line_index = -1;
 
         Course[] previous_courses = new Course[subtitution_num];

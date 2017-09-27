@@ -1,5 +1,3 @@
-import org.apache.commons.io.FileUtils;
-
 import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +15,7 @@ public class ReadCurriculum {
             File file = listOfFiles[a];
             if (file.isFile() && file.getName().endsWith(".csv")) {
                 curriculum[a] = new Curriculum();
-                String content = FileUtils.readFileToString(file);
+                //String content = FileUtils.readFileToString(file);
                 //Get the file name and use substring to take out the number of the year
 
                 //Using regex to take out the year number from the file name
@@ -33,7 +31,7 @@ public class ReadCurriculum {
                 Scanner in;
 
                 //Use Scanner to get inout from file
-                in = new Scanner(content);
+                in = new Scanner(file);
                 //Out put file for testing
                 //course_num is for counting how many courses are available in a specific year
                 //-1 is because in the .csv file, the first line is like "IT 2014", not a course
