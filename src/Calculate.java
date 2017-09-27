@@ -5,12 +5,12 @@ import java.util.Iterator;
 
 public class Calculate {
     //String is the key of years
-    HashMap<String, HashSet > curriculum = new HashMap<>();
-
+    private HashMap<String, HashSet > curriculum = new HashMap<>();
+    private HashMap<Integer,String> student_year = new HashMap<>();
     private void getCurriculum() throws IOException {
         //Read curriculum first
-        ReadCurriculum rc = new ReadCurriculum();
-        Curriculum[] curriculum = rc.read();
+       // ReadCurriculum rc = ;
+        Curriculum[] curriculum = new ReadCurriculum().read();
         for (int i = 0; i < curriculum.length; i++) {
             //Using the set to make the compare after easier
             HashSet<String> courses = new HashSet<>();
@@ -24,15 +24,23 @@ public class Calculate {
         }
     }
 
+    private void courseSubstitution(HashMap<Integer,HashSet> students_course_not_take) throws IOException{
+        HashMap<String,String> substitution = new ReadCourseSubstitution().read();
+        for(String key:substitution.keySet()){
+            System.out.println(substitution.get(key));
+        }
+    }
+
+
     public void checkAvailableCourses() throws IOException {
         //Read all the students profile first
         ReadStudentProfile rs = new ReadStudentProfile();
         Student[] students = rs.read();
         getCurriculum();
         //System.out.println(curriculum.get("2014"));
+
         //Using a map to collect every students course that taken for compare after
         HashMap<Integer, HashSet> student_course_taken = new HashMap<>();
-        HashMap<Integer,String> student_year = new HashMap<>();
         for (int i = 0; i < students.length; i++) {
             student_year.put(students[i].ID,students[i].year);
             //Using set to collect one student's courses
@@ -52,7 +60,7 @@ public class Calculate {
             student_course_taken.put(students[i].ID, courses_taken);
         }
         //Create a new map for checking which courses that students not take yet
-        HashMap<Integer,HashSet> student_course_not_take = new HashMap<>();
+        HashMap<Integer,HashSet> students_course_not_take = new HashMap<>();
 
         System.out.println(curriculum.get("2014"));
 
@@ -72,17 +80,14 @@ public class Calculate {
                     }
                 }
             }
-            student_course_not_take.put(id,course_not_take);
+            students_course_not_take.put(id,course_not_take);
         }
-        System.out.println(curriculum.get("2014"));
-        System.out.println(student_course_taken.get(16));
-        System.out.println(student_course_not_take.get(16));
+        //Considering the substitution
+        courseSubstitution(students_course_not_take);
 
-
-
-        HashSet<String> course_not_take = curriculum.get("2014");
-
-
+        System.out.println(curriculum.get("2016"));
+        System.out.println(student_course_taken.get(7));
+        System.out.println(students_course_not_take.get(7));
 
         for (int ID : student_course_taken.keySet()) {
           //  System.out.println(ID + " " + student_course_taken.get(ID));
