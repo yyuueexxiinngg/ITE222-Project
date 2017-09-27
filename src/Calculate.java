@@ -25,19 +25,27 @@ public class Calculate {
         }
     }
 
+    //The reason why using void is because HashMap are referencing
     private void courseSubstitution(HashMap<Integer, HashSet> students_course_not_take) throws IOException {
         //Read substitution file first
         Substitution substitution = new ReadCourseSubstitution().read();
         for (int id : students_course_not_take.keySet()) {
+            //Create a new set to store the course after substitute
             HashSet<String> course_not_take_subs = new HashSet<>();
+            //Check the student is using the old curriculum or nor
             if (student_year.get(id).equals(substitution.from_year)) {
+                //Get the courses he not take
                 for (String course_code : (HashSet<String>) students_course_not_take.get(id)) {
+                    //Check the course current working with is in the substitution file or not
                     if (substitution.substitution.get(course_code) != null) {
+                        //If it is, then put the new one in to the set
                         course_not_take_subs.add(substitution.substitution.get(course_code));
                     } else {
+                        //If it is not, them put the course code in to the set directly
                         course_not_take_subs.add(course_code);
                     }
                 }
+                //Finally put the new set in to the Map
                 students_course_not_take.put(id,course_not_take_subs);
             }
         }
