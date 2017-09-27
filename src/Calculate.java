@@ -24,7 +24,7 @@ public class Calculate {
         }
     }
 
-    public void checkAvaliableCourses() throws IOException {
+    public void checkAvailableCourses() throws IOException {
         //Read all the students profile first
         ReadStudentProfile rs = new ReadStudentProfile();
         Student[] students = rs.read();
@@ -39,8 +39,9 @@ public class Calculate {
             HashSet<String> courses_taken = new HashSet<>();
             for (int a = 0; a < students[i].course.length; a++) {
                 //Have to create a new set and get from the curriculum in order to use for each
-                HashSet<String> nset = curriculum.get(students[i].year);
-                for(String course_code: nset){
+//                HashSet<String> nset = curriculum.get(students[i].year);
+                //Force the object convert to HashSet<String>. The reason why it is an obj is because <String> is defined by user. Java does not know the type inside HashSet
+                for(String course_code: (HashSet<String>)curriculum.get(students[i].year)){
                     //Use for each to check the courses that the student taken and only collect those belong to IT
                     if(course_code.equals(students[i].course[a].course_code)){
                         courses_taken.add(course_code);
@@ -50,25 +51,28 @@ public class Calculate {
             //Finally put every students to the map
             student_course_taken.put(students[i].ID, courses_taken);
         }
-
+        //Create a new map for checking which courses that students not take yet
         HashMap<Integer,HashSet> student_course_not_take = new HashMap<>();
+
         System.out.println(curriculum.get("2014"));
 
         for(Integer id : student_course_taken.keySet()){
-            HashSet<String> nset = student_course_taken.get(id);
-            HashSet<String> full_curriculum = (HashSet<String>) curriculum.get(student_year.get(id)).clone();
+//            HashSet<String> nset = student_course_taken.get(id);
+            //A new set here is copy a curriculum and compare it with course taken. If is match, then remove it. Finally we will get the courses that students not taken. Again don't forget to convert
+            HashSet<String> course_not_take = (HashSet<String>) curriculum.get(student_year.get(id)).clone();
            // full_curriculum = curriculum.get(student_year.get(id));
 
-            Iterator<String> itr = full_curriculum.iterator();
+            //Use iterator to loop the data in the set and compare to the curriculum
+            Iterator<String> itr = course_not_take.iterator();
             while (itr.hasNext()){
                 String course_code = itr.next();
-                for(String course_taken : nset){
+                for(String course_taken : (HashSet<String>)student_course_taken.get(id)){
                     if(course_taken.equals(course_code)){
                         itr.remove();
                     }
                 }
             }
-            student_course_not_take.put(id,full_curriculum);
+            student_course_not_take.put(id,course_not_take);
         }
         System.out.println(curriculum.get("2014"));
         System.out.println(student_course_taken.get(16));
