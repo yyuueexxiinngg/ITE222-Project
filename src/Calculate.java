@@ -7,11 +7,15 @@ public class Calculate {
     //String is the key of years
     private HashMap<String, HashSet> curriculum = new HashMap<>();
     private HashMap<Integer, String> student_year = new HashMap<>();
+    private HashMap<Integer, Integer> courses_taken_num = new HashMap<>();
+    private HashMap<String, Integer> total_courses_num = new HashMap<>();
+    private HashSet<String> electives;
 
     private void getCurriculum() throws IOException {
         //Read curriculum first
-        // ReadCurriculum rc = ;
-        Curriculum[] curriculum = new ReadCurriculum().read();
+        ReadCurriculum rc = new ReadCurriculum();
+        Curriculum[] curriculum = rc.read();
+        this.electives = rc.readElecvtives();
         for (int i = 0; i < curriculum.length; i++) {
             //Using the set to make the compare after easier
             HashSet<String> courses = new HashSet<>();
@@ -22,6 +26,7 @@ public class Calculate {
             }
             //Put the final set to the map
             this.curriculum.put(curriculum[i].year, courses);
+            this.total_courses_num.put(curriculum[i].year, curriculum[i].course.length);
         }
     }
 
@@ -46,18 +51,29 @@ public class Calculate {
                     }
                 }
                 //Finally put the new set in to the Map
-                students_course_not_take.put(id,course_not_take_subs);
+                students_course_not_take.put(id, course_not_take_subs);
             }
         }
     }
 
+    //For remove the electives courses since they are opening every term randomly
+    public void removeElectives(HashMap<Integer, HashSet> students_course_not_take) {
+        for (int id : students_course_not_take.keySet()) {
+            //Get the courses that student not take and remove from it
+            students_course_not_take.get(id).removeAll(electives);
+        }
+    }
 
-    public void checkAvailableCourses() throws IOException {
+    private void graduationCheck() {
+
+    }
+
+    private HashMap<Integer, HashSet> checkAvailableCourses() throws IOException {
         //Read all the students profile first
         ReadStudentProfile rs = new ReadStudentProfile();
         Student[] students = rs.read();
+
         getCurriculum();
-        //System.out.println(curriculum.get("2014"));
 
         //Using a map to collect every students course that taken for compare after
         HashMap<Integer, HashSet> student_course_taken = new HashMap<>();
@@ -73,6 +89,12 @@ public class Calculate {
                     //Use for each to check the courses that the student taken and only collect those belong to IT
                     if (course_code.equals(students[i].course[a].course_code)) {
                         courses_taken.add(course_code);
+                        //Then count how many courses he already taken
+                        if (courses_taken_num.get(students[i].ID) == null) {
+                            courses_taken_num.put(students[i].ID, 1);
+                        } else {
+                            courses_taken_num.put(students[i].ID, courses_taken_num.get(students[i].ID) + 1);
+                        }
                     }
                 }
             }
@@ -101,16 +123,52 @@ public class Calculate {
             students_course_not_take.put(id, course_not_take);
         }
         //Considering the substitution
-        System.out.println(students_course_not_take.get(14));
+//        System.out.println(curriculum.get("2016"));
+//        System.out.println("course taken" + student_course_taken.get(17));
+//        System.out.println(students_course_not_take.get(17));
         courseSubstitution(students_course_not_take);
-        System.out.println(students_course_not_take.get(14));
-
+//        System.out.println(students_course_not_take.get(17));
+        //Remove all the electives courses since they are randomly open
+        removeElectives(students_course_not_take);
+//        System.out.println("course not take" + students_course_not_take.get(17));
+//        System.out.println(total_courses_num.get("2016"));
+//        System.out.println(courses_taken_num.get(17));
 /*        System.out.println(curriculum.get("2016"));
         System.out.println(student_course_taken.get(7));
         System.out.println(students_course_not_take.get(7));*/
 
-        for (int ID : students_course_not_take.keySet()) {
-              System.out.println(ID + " " + students_course_not_take.get(ID));
+        HashMap<Integer, HashSet> students_courses_can_take = (HashMap<Integer, HashSet>) students_course_not_take.clone();
+        //Get all the pre conditions base on the year of the student in
+        for (int id : student_year.keySet()) {
+            //Read the curriculum first. The curriculum here contains all the courses
+            Curriculum[] curriculum = new ReadCurriculum().read();
+            for (int i = 0; i < curriculum.length; i++) {
+                //Check the year that the students in and only load that year's course
+                if (curriculum[i].year.equals(student_year.get(id))) {
+                    for (int a = 0; a < curriculum[i].course.length; a++) {
+                        //If the course has pre conditions, then move on
+                        if (curriculum[i].course[a].pre.length > 0) {
+                            //If this student not take the courses that have the pre condition, then move on
+                            if (students_course_not_take.get(id).contains(curriculum[i].course[a].course_code)) {
+                                for (int b = 0; b < curriculum[i].course[a].pre.length; b++) {
+                                    //If the student not take the pre courses yet, than remove the courses from courses that he can take
+                                    if (!student_course_taken.get(id).contains(curriculum[i].course[a].pre[b])) {
+                                        students_courses_can_take.get(id).remove(curriculum[i].course[a].course_code);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return students_courses_can_take;
+    }
+
+    public void calculate() throws IOException {
+        HashMap<Integer, HashSet> students_courses_can_take = checkAvailableCourses();
+        for (int id : students_courses_can_take.keySet()) {
+            System.out.println(id + " " + students_courses_can_take.get(id));
         }
     }
 }

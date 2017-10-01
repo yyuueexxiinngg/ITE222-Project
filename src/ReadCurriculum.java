@@ -84,6 +84,7 @@ public class ReadCurriculum {
                 in.close();
             }
         }
+
         //Only print for testing
         String print = "";
         for (int i = 0; i < curriculum.length; i++) {
@@ -103,4 +104,17 @@ public class ReadCurriculum {
         out.close();
         return curriculum;
     }
+
+    public HashSet<String> readElecvtives() throws IOException{
+        HashSet<String> electives = new HashSet<>();
+        Scanner in = new Scanner(new File("src/other/Major electives.csv"));
+        while(in.hasNextLine()){
+            String line = in.nextLine();
+            electives.add(line);
+        }
+        in.close();
+        return electives;
+    }
+
+
 }

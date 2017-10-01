@@ -4,6 +4,6 @@ public class Student {
 	String name;
 	String year = "";
 	Course[] course;
-	int credit;
+	int courses_taken_num;
 	String grade;
 }

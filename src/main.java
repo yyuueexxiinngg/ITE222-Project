@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class main {
     public static void main(String[] args) throws IOException {
         Calculate c = new Calculate();
-        c.checkAvailableCourses();
+        c.calculate();
 /*
         ReadBlackList rb = new ReadBlackList();
         rb.read();*/
