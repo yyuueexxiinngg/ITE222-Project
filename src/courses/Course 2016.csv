@@ -4,7 +4,7 @@ ITE120,Web Development I
 ITE201,IT Service Desk & Incident Management
 ITE210,Ethics and Law for Information Technology
 ITE220,Web Development II,ITE120,ITE221
-ITE221,Programming I  
+ITE221,Programming I
 ITE222,Programming II,ITE221
 ITE231,Fundamentals of System Administration
 ITE233,Application Development,ITE220
@@ -22,11 +22,11 @@ ITE367,Software Architecture and Modelling
 ITE368,Software Testing and Maintenance
 ITE420,Information and System Security,ITE221,ITE475
 ITE435,Software Engineering
-ITE441,Fundamentals of Database System     
+ITE441,Fundamentals of Database System
 ITE442,Database Management Systems,ITE441
 ITE446,Current Topics in Software Engineering
 ITE447,Current Topics in Web Technology,ITE220
 ITE448,Current Topics in Mobile Computing,ITE220
 ITE451,Cloud Computing,ITE220
-ITE475,Data Communication and Networking 
+ITE475,Data Communication and Networking
 ITE479,IT Planning and Project Management,ITE321

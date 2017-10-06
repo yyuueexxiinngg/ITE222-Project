@@ -1,7 +1,5 @@
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 public class Calculate {
     //String is the key of years
@@ -9,13 +7,14 @@ public class Calculate {
     private HashMap<Integer, String> student_year = new HashMap<>();
     private HashMap<Integer, Integer> courses_taken_num = new HashMap<>();
     private HashMap<String, Integer> total_courses_num = new HashMap<>();
+    private HashMap<String, Integer> students_num = new HashMap<>();
     private HashSet<String> electives;
 
     private void getCurriculum() throws IOException {
         //Read curriculum first
         ReadCurriculum rc = new ReadCurriculum();
         Curriculum[] curriculum = rc.read();
-        this.electives = rc.readElecvtives();
+        this.electives = rc.readElectives();
         for (int i = 0; i < curriculum.length; i++) {
             //Using the set to make the compare after easier
             HashSet<String> courses = new HashSet<>();
@@ -57,18 +56,91 @@ public class Calculate {
     }
 
     //For remove the electives courses since they are opening every term randomly
-    public void removeElectives(HashMap<Integer, HashSet> students_course_not_take) {
+    private void removeElectives(HashMap<Integer, HashSet> students_course_not_take) {
         for (int id : students_course_not_take.keySet()) {
             //Get the courses that student not take and remove from it
             students_course_not_take.get(id).removeAll(electives);
         }
     }
 
-    private void graduationCheck() {
+    private HashMap<String,Integer> getBasicCourse() throws IOException {
+        HashMap<String, Integer> score = new HashMap<>();
+        Curriculum[] curriculum = new ReadCurriculum().read();
+        //First get curriculum
+        for (int i = 1; i < curriculum.length; i++) {
+            //If is current year's curriculum
+            if (curriculum[i].year.contains(ReadConfiguration.current_curriculum)) {
+                for (int a = 0; a < curriculum[i].course.length; a++) {
+                    //Check those have pre conditions
+                    if (curriculum[i].course[a].pre.length > 0) {
+                        for (int b = 0; b < curriculum[i].course[a].pre.length; b++) {
+                            //Search im the map that the course is already exist
+                            if ((score.get(curriculum[i].course[a].pre[b])) != null) {
+                                //Not exist put 1
+                                score.put(curriculum[i].course[a].pre[b], score.get(curriculum[i].course[a].pre[b]) + 1);
+                            } else {
+                                //Exist, +1
+                                score.put(curriculum[i].course[a].pre[b], 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        //Check again but this time to add more score to the more basic one. i.e. Add ITE220 score to INT120
+        for (String course_code : score.keySet()) {
+            for (int i = 1; i < curriculum.length; i++) {
+                if (curriculum[i].year.contains(ReadConfiguration.current_curriculum)) {
+                    for (int a = 0; a < curriculum[i].course.length; a++) {
+                        if (curriculum[i].course[a].pre.length > 0) {
+                            for (int b = 0; b < curriculum[i].course[a].pre.length; b++) {
+                                if (course_code.equals(curriculum[i].course[a].pre[b])) {
+                                    if (score.get(curriculum[i].course[a].course_code) != null) {
+                                        //Add ITE220 scores to ITE120
+                                        score.put(course_code, score.get(course_code) + score.get(curriculum[i].course[a].course_code));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Using list to sort the value in the map
+/*        Comparator<Map.Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        };
+        List<Map.Entry<String, Integer>> score_list = new ArrayList<>(score.entrySet());
+        Collections.sort(score_list, valueComparator);
+        int index = 0;
+        for (Map.Entry<String, Integer> entry : score_list) {
+            System.out.println(entry.getKey() + "'s score: " + entry.getValue());
+           *//* if(index>1){
+                //We only need 2 courses that always open
+                score.remove(entry.getKey());
+            }
+            index++;*//*
+        }*/
+        return score;
     }
 
-    private HashMap<Integer, HashSet> checkAvailableCourses() throws IOException {
+    private boolean graduationCheck(int id) {
+        boolean is_about_to_graduate = false;
+        if ((total_courses_num.get(student_year.get(id)) - electives.size() - courses_taken_num.get(id) < 5)) {
+            is_about_to_graduate = true;
+//            System.out.println("No." + id + " is about to graduate");
+        } else {
+//            System.out.println("No." + id + " still has more courses to learn");
+        }
+        return is_about_to_graduate;
+    }
+
+    public HashMap<Integer, HashSet> checkAvailableCourses() throws IOException {
         //Read all the students profile first
         ReadStudentProfile rs = new ReadStudentProfile();
         Student[] students = rs.read();
@@ -140,6 +212,8 @@ public class Calculate {
         HashMap<Integer, HashSet> students_courses_can_take = (HashMap<Integer, HashSet>) students_course_not_take.clone();
         //Get all the pre conditions base on the year of the student in
         for (int id : student_year.keySet()) {
+
+
             //Read the curriculum first. The curriculum here contains all the courses
             Curriculum[] curriculum = new ReadCurriculum().read();
             for (int i = 0; i < curriculum.length; i++) {
@@ -162,13 +236,74 @@ public class Calculate {
                 }
             }
         }
+        for(int id:student_course_taken.keySet()){
+            //System.out.println(id+" "+student_course_taken.get(id));
+        }
         return students_courses_can_take;
     }
 
-    public void calculate() throws IOException {
+    public HashMap<String, Integer> calculate() throws IOException {
+        getBasicCourse();
+        //Get all the courses that all students can take
         HashMap<Integer, HashSet> students_courses_can_take = checkAvailableCourses();
+        //To store the score
+        HashMap<String, Integer> score = new HashMap<>();
+        HashMap<String ,Integer> basic_courses = getBasicCourse();
         for (int id : students_courses_can_take.keySet()) {
-            System.out.println(id + " " + students_courses_can_take.get(id));
+            Iterator itr = students_courses_can_take.get(id).iterator();
+            if (graduationCheck(id)) {
+                while (itr.hasNext()) {
+                    String course_code = (String) itr.next();
+                    if (score.get(course_code) != null) {
+                        score.put(course_code, score.get(course_code) + 4);
+                    } else {
+                        score.put(course_code, 4);
+                    }
+
+                    if (students_num.get(course_code) == null) {
+                        students_num.put(course_code, 1);
+                    } else {
+                        students_num.put(course_code, students_num.get(course_code) + 1);
+                    }
+
+                }
+            } else {
+                while (itr.hasNext()) {
+                    String course_code = (String) itr.next();
+                    if (score.get(course_code) != null) {
+                        score.put(course_code, score.get(course_code) + 2);
+                    } else {
+                        score.put(course_code, 2);
+                    }
+
+                    if (students_num.get(course_code) == null) {
+                        students_num.put(course_code, 1);
+                    } else {
+                        students_num.put(course_code, students_num.get(course_code) + 1);
+                    }
+
+                }
+            }
+        }
+
+        for(String course_code :basic_courses.keySet()){
+            if(score.get(course_code)!=null){
+                score.put(course_code,score.get(course_code)+(basic_courses.get(course_code)*2));
+            }else {
+                score.put(course_code,basic_courses.get(course_code)*2);
+            }
+        }
+
+        return score;
+    }
+
+    public HashMap<String, Integer> getStudentsNum() throws IOException {
+        if (!this.students_num.isEmpty()) {
+            return this.students_num;
+        } else {
+            calculate();
+            return this.students_num;
         }
     }
+
 }

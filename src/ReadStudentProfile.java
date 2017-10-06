@@ -104,6 +104,17 @@ public class ReadStudentProfile {
         return students;
     }
 
+    public String getName(int id)throws IOException{
+        Student[] students = read();
+        for(int i=0;i<students.length;i++){
+            if(id==students[i].ID){
+                return students[i].name;
+            }
+        }
+        return null;
+    }
+
+
     public Student[] read() throws IOException {
         PrintStream out = new PrintStream("testing_out_student_profile.csv");
         Scanner in = new Scanner(new File("src/other/Studentlist-ITE222project.csv"));

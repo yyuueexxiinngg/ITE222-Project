@@ -105,9 +105,9 @@ public class ReadCurriculum {
         return curriculum;
     }
 
-    public HashSet<String> readElecvtives() throws IOException{
+    public HashSet<String> readElectives() throws IOException{
         HashSet<String> electives = new HashSet<>();
-        Scanner in = new Scanner(new File("src/other/Major electives.csv"));
+        Scanner in = new Scanner(new File("src/other/RemoveElectives.csv"));
         while(in.hasNextLine()){
             String line = in.nextLine();
             electives.add(line);
@@ -116,5 +116,23 @@ public class ReadCurriculum {
         return electives;
     }
 
+    public static String getCourseName(String course_code) throws IOException{
+        File folder = new File("src/courses");
+        File[] listOfFiles = folder.listFiles();
+        for (int a = 0; a < listOfFiles.length; a++) {
+            File file = listOfFiles[a];
+            if(file.getName().contains(ReadConfiguration.current_curriculum)){
+                Scanner in = new Scanner(file);
+                while (in.hasNext()){
+                    String line = in.nextLine();
+                    String[] split = line.split(",");
+                    if(split[0].contains(course_code)){
+                        return split[1];
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 }
