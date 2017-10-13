@@ -18,13 +18,14 @@ ITE240,Principles of Operating Systems,54,16,No
  
 Random Electives
 Course code,Course Name
-ITE342,Application Development-IOS
+ITE340,E-Commerce Systems & Infrastructure
 ITE451,Cloud Computing
 ITE365,Software Quality Management
-ITE368,Software Testing and Maintenance
+ITE343,Application Development-Android
+ITE367,Software Architecture and Modelling
 
 Lecture name,Assigned courses
-Ike,ITE254,ITE210,ITE342,ITE220
-Apiporn,ITE120,ITE240,ITE441,ITE221
-Chaky,ITE451,ITE222,ITE321,ITE365
-Atikom,ITE475,ITE368,ITE337
+Ike,ITE254,ITE210,ITE220,ITE451
+Apiporn,ITE120,ITE340,ITE240,ITE441
+Chaky,ITE221,ITE222,ITE321,ITE365
+Atikom,ITE475,ITE343,ITE367,ITE337

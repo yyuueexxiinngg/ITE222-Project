@@ -88,6 +88,8 @@ public class Output {
                         } else {
                             random_open.add(courses[0]);
                         }
+                    }else {
+                        random_open.add(courses[random]);
                     }
                 }
             } else if (major.contains("Software")) {
@@ -153,6 +155,7 @@ public class Output {
 
         //Clone a new set so we can remove form it while keep the list
         HashSet<String> assign_courses = (HashSet<String>) courses.clone();
+        System.out.println(assign_courses);
         for (int i = 0; i < lecturers.length; i++) {
             HashSet<String> course = new HashSet<>();
             Iterator<String> itr = assign_courses.iterator();
