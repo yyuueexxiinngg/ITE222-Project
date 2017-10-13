@@ -1,2 +1,10 @@
-CURRENT_CURRICULUM=2016
-COURSES_OF_LECTURER=4
+current_curriculum=2016
+courses_of_lecturer=4
+//Maximum courses a student can choose
+courses_of_student=4
+//How many score should be add if a student about to graduate need take this course
+add_score_for_graduation=4
+add_score_for_normal_student=2
+//If the course appear one times in the pre condition, how much score should be added
+add_score_for_basic_course=2
+if_deduct_score_to_courses_opened=true

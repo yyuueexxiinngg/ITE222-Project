@@ -63,7 +63,7 @@ public class Calculate {
         }
     }
 
-    private HashMap<String,Integer> getBasicCourse() throws IOException {
+    private HashMap<String, Integer> getBasicCourse() throws IOException {
         HashMap<String, Integer> score = new HashMap<>();
         Curriculum[] curriculum = new ReadCurriculum().read();
         //First get curriculum
@@ -108,24 +108,6 @@ public class Calculate {
             }
         }
 
-        //Using list to sort the value in the map
-/*        Comparator<Map.Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o2.getValue() - o1.getValue();
-            }
-        };
-        List<Map.Entry<String, Integer>> score_list = new ArrayList<>(score.entrySet());
-        Collections.sort(score_list, valueComparator);
-        int index = 0;
-        for (Map.Entry<String, Integer> entry : score_list) {
-            System.out.println(entry.getKey() + "'s score: " + entry.getValue());
-           *//* if(index>1){
-                //We only need 2 courses that always open
-                score.remove(entry.getKey());
-            }
-            index++;*//*
-        }*/
         return score;
     }
 
@@ -195,25 +177,14 @@ public class Calculate {
             students_course_not_take.put(id, course_not_take);
         }
         //Considering the substitution
-//        System.out.println(curriculum.get("2016"));
-//        System.out.println("course taken" + student_course_taken.get(17));
-//        System.out.println(students_course_not_take.get(17));
+
         courseSubstitution(students_course_not_take);
-//        System.out.println(students_course_not_take.get(17));
         //Remove all the electives courses since they are randomly open
         removeElectives(students_course_not_take);
-//        System.out.println("course not take" + students_course_not_take.get(17));
-//        System.out.println(total_courses_num.get("2016"));
-//        System.out.println(courses_taken_num.get(17));
-/*        System.out.println(curriculum.get("2016"));
-        System.out.println(student_course_taken.get(7));
-        System.out.println(students_course_not_take.get(7));*/
 
         HashMap<Integer, HashSet> students_courses_can_take = (HashMap<Integer, HashSet>) students_course_not_take.clone();
         //Get all the pre conditions base on the year of the student in
         for (int id : student_year.keySet()) {
-
-
             //Read the curriculum first. The curriculum here contains all the courses
             Curriculum[] curriculum = new ReadCurriculum().read();
             for (int i = 0; i < curriculum.length; i++) {
@@ -236,7 +207,7 @@ public class Calculate {
                 }
             }
         }
-        for(int id:student_course_taken.keySet()){
+        for (int id : student_course_taken.keySet()) {
             //System.out.println(id+" "+student_course_taken.get(id));
         }
         return students_courses_can_take;
@@ -248,18 +219,25 @@ public class Calculate {
         HashMap<Integer, HashSet> students_courses_can_take = checkAvailableCourses();
         //To store the score
         HashMap<String, Integer> score = new HashMap<>();
-        HashMap<String ,Integer> basic_courses = getBasicCourse();
+
+        //The string is course code and Integer is how many times dose the course appears in pre condition
+        HashMap<String, Integer> basic_courses = getBasicCourse();
         for (int id : students_courses_can_take.keySet()) {
             Iterator itr = students_courses_can_take.get(id).iterator();
             if (graduationCheck(id)) {
+                //For students about to graduate
                 while (itr.hasNext()) {
+                    //Processing course a student can take
                     String course_code = (String) itr.next();
+                    //If this course already exist then add score
                     if (score.get(course_code) != null) {
-                        score.put(course_code, score.get(course_code) + 4);
+                        score.put(course_code, score.get(course_code) + ReadConfiguration.add_score_for_graduation);
                     } else {
-                        score.put(course_code, 4);
+                        //If it is not, create it
+                        score.put(course_code, ReadConfiguration.add_score_for_graduation);
                     }
 
+                    //Count the number of students in this course
                     if (students_num.get(course_code) == null) {
                         students_num.put(course_code, 1);
                     } else {
@@ -268,12 +246,13 @@ public class Calculate {
 
                 }
             } else {
+                //For normal students
                 while (itr.hasNext()) {
                     String course_code = (String) itr.next();
                     if (score.get(course_code) != null) {
-                        score.put(course_code, score.get(course_code) + 2);
+                        score.put(course_code, score.get(course_code) + ReadConfiguration.add_score_for_normal_student);
                     } else {
-                        score.put(course_code, 2);
+                        score.put(course_code, ReadConfiguration.add_score_for_normal_student);
                     }
 
                     if (students_num.get(course_code) == null) {
@@ -286,14 +265,27 @@ public class Calculate {
             }
         }
 
-        for(String course_code :basic_courses.keySet()){
-            if(score.get(course_code)!=null){
-                score.put(course_code,score.get(course_code)+(basic_courses.get(course_code)*2));
-            }else {
-                score.put(course_code,basic_courses.get(course_code)*2);
+
+        for (String course_code : basic_courses.keySet()) {
+            //Check basic course, if this course is basic course, add more score
+            if (score.get(course_code) != null && score.get(course_code) > 0) {
+                score.put(course_code, score.get(course_code) + (basic_courses.get(course_code) * ReadConfiguration.add_score_for_basic_course));
+            } else {
+                score.put(course_code, basic_courses.get(course_code) * ReadConfiguration.add_score_for_basic_course);
             }
         }
 
+
+        if(ReadConfiguration.if_deduct_score_to_courses_opened){
+            HashMap<String, Integer> courses_opened = new ReadCoursesOpened().read();
+            for (String course_code : score.keySet()) {
+                //If the course are opened last term
+                if (courses_opened.get(course_code) != null && score.get(course_code) > 0) {
+                    //Deduct score to the course
+                    score.put(course_code, score.get(course_code) - courses_opened.get(course_code));
+                }
+            }
+        }
         return score;
     }
 
