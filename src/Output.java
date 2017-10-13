@@ -34,7 +34,7 @@ public class Output {
     private void form1() throws IOException {
         //Read configuration first
         ReadConfiguration.readConfiguration();
-        PrintStream out = new PrintStream("src/output/Suggestion2.csv");
+        PrintStream out = new PrintStream("src/output/Suggestion.csv");
         String out_str = "Course Code,Course Name,Score,Student Num,Is opened\n";
         Calculate c = new Calculate();
         //Get the score of each course, key is course code

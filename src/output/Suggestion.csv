@@ -1,32 +1,30 @@
-Course Code,Course Name,Score,Student Num
-ITE240,Principles of Operating Systems,54,16
-ITE441,Fundamentals of Database System,46,15
-ITE475,Data Communication and Networking,42,14
-ITE220,Web Development II,38,8
-ITE221,Programming I,32,6
-ITE222,Programming II,28,7
-ITE321,System Analysis Design& Implementation,28,9
-ITE254,Human Computer Interaction,26,9
-ITE120,Web Development I,22,3
-ITE337,Content Management Systems,22,8
-ITE210,Ethics and Law for Information Technology,18,8
-ITE231,Fundamentals of System Administration,16,7
-ITE101,Introduction to Information Technology,12,3
-ITE420,Information and System Security,12,3
-ITE201,IT Service Desk & Incident Management,10,5
-ITE479,IT Planning and Project Management,10,3
-
+Course Code,Course Name,Score,Student Num,Is opened
+ITE240,Principles of Operating Systems,54,16,No
+ ITE441,Fundamentals of Database System,46,15,No
+ ITE475,Data Communication and Networking,42,14,No
+ ITE220,Web Development II,38,8,No
+ ITE221,Programming I,32,6,No
+ ITE222,Programming II,28,7,No
+ ITE321,System Analysis Design& Implementation,28,9,No
+ ITE254,Human Computer Interaction,26,9,No
+ ITE120,Web Development I,22,3,No
+ ITE337,Content Management Systems,22,8,No
+ ITE210,Ethics and Law for Information Technology,18,8,No
+ ITE231,Fundamentals of System Administration,16,7,No
+ ITE101,Introduction to Information Technology,12,3,No
+ ITE420,Information and System Security,12,3,No
+ ITE201,IT Service Desk & Incident Management,10,5,No
+ ITE479,IT Planning and Project Management,10,3,No
+ 
 Random Electives
 Course code,Course Name
-ITE362,Digital Advertising Technology
 ITE342,Application Development-IOS
+ITE451,Cloud Computing
 ITE365,Software Quality Management
-ITE446,Current Topics in Software Engineering
-ITE448,Current Topics in Mobile Computing
+ITE368,Software Testing and Maintenance
 
 Lecture name,Assigned courses
 Ike,ITE254,ITE210,ITE342,ITE220
-Apiporn,ITE120,ITE362,ITE240,ITE441
-Chaky,ITE221,ITE222,ITE321,ITE365
-Atikom,ITE475,ITE337,ITE446,ITE448
-
+Apiporn,ITE120,ITE240,ITE441,ITE221
+Chaky,ITE451,ITE222,ITE321,ITE365
+Atikom,ITE475,ITE368,ITE337
