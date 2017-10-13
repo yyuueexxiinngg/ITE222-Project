@@ -1,0 +1,26 @@
+Course Code,Course Name,Score,Student Num
+ITE240,Principles of Operating Systems,54,16
+ITE441,Fundamentals of Database System,46,15
+ITE475,Data Communication and Networking,42,14
+ITE220,Web Development II,38,8
+ITE221,Programming I,32,6
+ITE222,Programming II,28,7
+ITE321,System Analysis Design& Implementation,28,9
+ITE254,Human Computer Interaction,26,9
+ITE120,Web Development I,22,3
+ITE337,Content Management Systems,22,8
+ITE210,Ethics and Law for Information Technology,18,8
+ITE231,Fundamentals of System Administration,16,7
+ITE101,Introduction to Information Technology,12,3
+ITE420,Information and System Security,12,3
+ITE201,IT Service Desk & Incident Management,10,5
+ITE479,IT Planning and Project Management,10,3
+
+Random Electives
+Course code,Course Name
+ITE362,Digital Advertising Technology
+ITE365,Software Quality Management
+ITE367,Software Architecture and Modelling
+ITE447,Current Topics in Web Technology
+ITE448,Current Topics in Mobile Computing
+
